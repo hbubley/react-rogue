@@ -1,8 +1,8 @@
 class Player {
-    constructor(x, y, size){
+    constructor(x, y, tileSize){
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.tileSize = tileSize;
     }
 
     move(dx, dy){
@@ -14,7 +14,7 @@ class Player {
         context.fillStyle = '#f00';
         context.textBaseLine = 'hanging';
         context.font = '16px Helvetica';
-        context.fillText('@', this.x*this.size, this.y*this.size);
+        context.fillText('@', this.x*this.tileSize, this.y*this.tileSize);
     }
 }
 
