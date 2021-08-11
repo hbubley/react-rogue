@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import InputManager from './InputManager';
+import Player from './Player';
 
 const ReactRogue = ({ width, height, tileSize }) => {
     const canvasRef = useRef();
-    const [player, setPlayer] = useState({x: 64, y: 128 });
+    const [player, setPlayer] = useState(new Player(1, 2, tileSize));
     let inputManager = new InputManager();
 
     const handleInput = (action, data) => {
         console.log("handle input", action, data)
-        let newPlayer = {...player};
-
-        newPlayer.x += tileSize*data.x
-        newPlayer.y += tileSize*data.y
+        let newPlayer = new Player()
+        Object.assign(newPlayer, player);
+        newPlayer.move(data.x, data.y)
 
         setPlayer(newPlayer)
     }
@@ -29,8 +29,7 @@ const ReactRogue = ({ width, height, tileSize }) => {
         console.log(canvasRef)
         const ctx = canvasRef.current.getContext('2d');
         ctx.clearRect(0, 0, width * tileSize, height * tileSize)
-        ctx.fillStyle = "#000"
-        ctx.fillRect(player.x, player.y, width, height)
+        player.draw(ctx);
     }, [height, player, tileSize, width]);
 
     return <canvas
