@@ -44,8 +44,8 @@ class InputManager {
         document.addEventListener('keydown', this.handleKeys);
     }
 
-    unbindKey() {
-        document.removeEventListener('keydown');
+    unbindKeys() {
+        document.removeEventListener('keydown', this.handleKeys);
     }
 }
 
